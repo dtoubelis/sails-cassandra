@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "0.11"
+  - "0.10"
+services:
+  - cassandra
+before_script:
+  - echo 'Change me!!!'
+notifications:
+  email:
+    - dmitri.toubelis@alkeron.com
