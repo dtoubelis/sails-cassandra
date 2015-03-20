@@ -11,15 +11,16 @@
     "url": "git://github.com/dtoubelis/sails-cassandra.git"
   },
   "keywords": [
-    "cassandra",
-    "orm",
+    "sails",
     "waterline",
-    "sails"
+    "cassandra",
+    "orm"
   ],
   "author": "Alkeron Multimedia",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
+    "cassandra-driver": "~2.0.0",
     "async": "~0.9.0",
     "lodash": "~2.4.1",
     "waterline-errors": "~0.10.0",
@@ -35,9 +36,7 @@
     "waterlineVersion": "~0.10.0",
     "interfaces": [
       "semantic",
-      "queryable",
-      "migratable",
-      "associations"
+      "queryable"
     ]
   }
 }
