@@ -1,6 +1,6 @@
 {
   "name": "sails-cassandra",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "description": "Apache Cassandra adapter for Sails.js",
   "main": "./lib/adapter.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "cassandra-driver": "~2.0.0",
+    "long": "~2.2.0",
     "async": "~0.9.0",
     "lodash": "~2.4.1",
     "waterline-errors": "~0.10.0",
@@ -35,8 +36,7 @@
   "waterlineAdapter": {
     "waterlineVersion": "~0.10.0",
     "interfaces": [
-      "semantic",
-      "queryable"
+      "semantic"
     ]
   }
 }

@@ -22,8 +22,9 @@ var Adapter = require('../../lib/adapter');
 
 
 // Grab targeted interfaces from this adapter's `package.json` file:
-var package = {},
-  interfaces = [];
+var package = {};
+var interfaces = [];
+
 try {
   package = require('../../package.json');
   interfaces = package.waterlineAdapter.interfaces;
@@ -37,7 +38,6 @@ try {
 }
 
 
-
 log.info('Testing `' + package.name + '`, a Sails/Waterline adapter.');
 log.info('Running `waterline-adapter-tests` against ' + interfaces.length + ' interfaces...');
 log.info('( ' + interfaces.join(', ') + ' )');
@@ -45,7 +45,6 @@ console.log();
 log('Latest draft of Waterline adapter interface spec:');
 log('http://links.sailsjs.org/docs/plugins/adapters/interfaces');
 console.log();
-
 
 
 /**
@@ -67,15 +66,10 @@ new TestRunner({
 
   // Default connection config to use.
   config: {
-    host: process.env.WATERLINE_ADAPTER_TESTS_HOST || 'localhost',
-    port: process.env.WATERLINE_ADAPTER_TESTS_PORT || 9042,
+    contactPoints: [ process.env.WATERLINE_ADAPTER_TESTS_HOST || '127.0.0.1' ],
     user: process.env.WATERLINE_ADAPTER_TESTS_USER || 'root',
     password: process.env.WATERLINE_ADAPTER_TESTS_PASSWORD || '',
-    database: process.env.WATERLINE_ADAPTER_TESTS_DATABASE || 'sails_mysql',
-    pool: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-    waitForConnections: true
+    keyspace: process.env.WATERLINE_ADAPTER_TESTS_DATABASE || 'test'
   },
 
   // The set of adapter interfaces to test against.
