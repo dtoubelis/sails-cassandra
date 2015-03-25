@@ -1,9 +1,8 @@
 # sails-cassandra
-Cassanda database adapter for Sails/Waterline
+Apache Cassanda database adapter for Sails/Waterline
 
 
 ## Installation
-
 Install from NPM.
 
 ```bash
@@ -12,17 +11,22 @@ $ npm install sails-cassandra
 ```
 
 ## Sails Configuration
-
-Add the `cassandra` config to the `config/connections.js` file. Basic options:
+Add the `cassandra` configuration to the `config/connections.js` file. The basic
+options are as follows:
 
 ```javascript
 module.exports.connections = {
   cassandra: {
     module        : 'sails-cassandra',
-    contactPoints : [ '127.0.0.1' ],
+
+    // typical sails/waterline options (see comment below)
     user          : 'username',
     password      : 'password',
-    keyspace      : 'keyspace name'
+
+    // cassandra driver options
+    contactPoints : [ '127.0.0.1' ],
+    keyspace      : 'keyspace name',
+    ...
   }
 };
 ```
@@ -35,10 +39,22 @@ module.exports.models = {
 };
 ```
 
-## Run tests
+Adapter configuration may contain any of [Cassandra client options].
+However, you probably will only need `contactPoints` and `keyspace` to get
+started and the adapter will provide reasonable defaults for the rest.
 
-You can set environment variables to override the default database config for
-the tests, e.g.:
+[Cassandra client options]: http://www.datastax.com/documentation/developer/nodejs-driver/2.0/common/drivers/reference/clientOptions.html
+
+Authentication information for `cassandra-driver` is typically supplied in
+`authProvider` option, however `sails-cassandra` adapter will also recognize
+`user` and `password` options and convert them into `authProvider` overriding
+any existing. This also means that if you wish to use your own `authProvider`
+configuration you would need to remove `user` and `password` from configuration.  
+
+
+## Run tests
+You can set environment variables to override the default database configuration
+for running tests as follows:
 
 ```sh
 $ WATERLINE_ADAPTER_TESTS_PASSWORD=yourpass npm test
@@ -100,7 +116,7 @@ underlying database into the framework. It also does not work very well with
 sharding and replication.
 
 Cassandra database does not support autoincrement, however it achieves the same
-functionality in a much more efficient way by using time based UUIDs (A.K.A.
+functionality in a much more efficient way by using time based UUIDs (a.k.a.
 Type 1 UUID) for primary keys.
 
 Sails/Waterline supports autoincrement and its implementation is heavily
@@ -190,3 +206,4 @@ models for existing tables:
 
 ## License
 See [LICENSE.md](./LICENSE.md) file for details.
+
