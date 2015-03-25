@@ -10,7 +10,7 @@ Install from NPM.
 $ npm install sails-cassandra
 ```
 
-## Sails Configuration
+## Configuring Sail
 Add the `cassandra` configuration to the `config/connections.js` file. The basic
 options are as follows:
 
@@ -55,7 +55,7 @@ an existing value. This also means that if you wish to use your own `authProvide
 you will need to remove `user` and `password` from the configuration.  
 
 
-## Run tests
+## Running Tests
 You can set environment variables to override the default database configuration
 for running tests as follows:
 
@@ -75,12 +75,12 @@ Default settings are:
 }
 ```
 
-## Implementetion notes
+## Implementation Notes
 This section describes behaviour of Apache Cassandra adapter distinct from other
 database types.
 
 
-### Mapping of column and table names
+### Naming of tables and columns
 Column and table names in Cassandra are case insensitive and this ambiguity
 makes it difficult to map between attribute names that are case sensitive and
 column names that are not. There are two possible workarounds for this:
@@ -96,7 +96,7 @@ column names that are not. There are two possible workarounds for this:
    the current preferred approach.
 
 
-### Mandatory use of indexes for lookups
+### Use of indexes
 Apache Cassandra require index on a column that is used in `where` clause of
 `select` statement and unlike other database it will produce and exception if
 the index is missing.
@@ -112,7 +112,7 @@ will create indexes for attributes with `index` or `unique` attributes set to
 > and both are treated in the exactly same way.
 
 
-### Autoincrement field
+### Autoincrement
 The autoincrement feature was plaguing ORM frameworks right from their inseption
 as it requires 1-2 extra queries in order to retrieve new record identifier from
 underlying database into the framework. It also does not work very well with
