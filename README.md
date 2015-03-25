@@ -2,6 +2,60 @@
 Cassanda database adapter for Sails/Waterline
 
 
+## Installation
+
+Install from NPM.
+
+```bash
+# In your app:
+$ npm install sails-cassandra
+```
+
+## Sails Configuration
+
+Add the `cassandra` config to the `config/connections.js` file. Basic options:
+
+```javascript
+module.exports.connections = {
+  cassandra: {
+    module        : 'sails-cassandra',
+    contactPoints : [ '127.0.0.1' ],
+    user          : 'username',
+    password      : 'password',
+    keyspace      : 'keyspace name'
+  }
+};
+```
+
+And then change default model configuration in the `config/models.js`:
+
+```javascript
+module.exports.models = {
+  connection: 'cassandra'
+};
+```
+
+## Run tests
+
+You can set environment variables to override the default database config for
+the tests, e.g.:
+
+```sh
+$ WATERLINE_ADAPTER_TESTS_PASSWORD=yourpass npm test
+```
+
+
+Default settings are:
+
+```javascript
+{
+  contactPoints: [ process.env.WATERLINE_ADAPTER_TESTS_HOST || '127.0.0.1' ],
+  user: process.env.WATERLINE_ADAPTER_TESTS_USER || 'root',
+  password: process.env.WATERLINE_ADAPTER_TESTS_PASSWORD || '',
+  keyspace: process.env.WATERLINE_ADAPTER_TESTS_DATABASE || 'test'
+}
+```
+
 ## Implementetion notes
 This section describes behaviour of Apache Cassandra adapter distinct from other
 database types.
@@ -68,8 +122,8 @@ achieve the same functionality using the following rules:
 > specifications as it requires `autoIncrement` field to be of type `integer`.
 > Please use this on your own discretion. 
 
-### Type conversion between Cassandra and Sails/Waterline
 
+### Type conversion between Cassandra and Sails/Waterline
 The following table represents mappings between Sails/Waterline model data types
 and Apache Cassandra data types:
 
