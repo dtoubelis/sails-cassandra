@@ -186,3 +186,7 @@ models for existing tables:
 > Sails/Waterline. For instance, cassandra type `timeuuid` will be converted to
 > `string` when reading from the database even though `cassandra-driver` returns
 > `TimeUuid` type.
+
+
+## License
+See [LICENSE.md](./LICENSE.md) file for details.
