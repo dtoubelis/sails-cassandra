@@ -16,7 +16,10 @@ options are as follows:
 
 ```javascript
 module.exports.connections = {
-  cassandra: {
+
+  // name of your connection
+  my-cassandra-connection: {
+
     module        : 'sails-cassandra',
 
     // typical sails/waterline options (see comment below)
@@ -35,7 +38,7 @@ And then change default model configuration in the `config/models.js`:
 
 ```javascript
 module.exports.models = {
-  connection: 'cassandra'
+  connection: 'my-cassandra-connection'
 };
 ```
 
@@ -48,8 +51,8 @@ started and the adapter will provide reasonable defaults for the rest.
 Authentication information for `cassandra-driver` is typically supplied in
 `authProvider` option, however `sails-cassandra` adapter will also recognize
 `user` and `password` options and convert them into `authProvider` overriding
-any existing. This also means that if you wish to use your own `authProvider`
-configuration you would need to remove `user` and `password` from configuration.  
+an existing value. This also means that if you wish to use your own `authProvider`
+you will need to remove `user` and `password` from the configuration.  
 
 
 ## Run tests
