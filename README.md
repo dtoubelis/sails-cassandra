@@ -1,3 +1,5 @@
+> **Note:** This project is under active development and the adapter is not completely functional yet (even if documentation says so). Please wait for the first release if you want to use it in your project.
+
 # sails-cassandra
 Apache Cassanda database adapter for Sails/Waterline
 
