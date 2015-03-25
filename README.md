@@ -21,54 +21,66 @@ The autoincrement feature was plaguing ORM frameworks right from their inseption
 
 Cassandra database does not support autoincrement, however it achieves the same functionality in a much more efficient way by using time based (A.K.A. Type 1) UUIDs for primary keys.
 
-Sails/Waterline supports autoincrement and its implementation is heavily influenced by MySQL database. `sails-cassandra` adapter makes an attempt to achieve the same functionality without breaking any existing logic. and this is how:
+Sails/Waterline supports autoincrement and its implementation is heavily influenced by MySQL database. The `sails-cassandra` adapter makes an attempt to achieve the same functionality using the following rules:
 1. Model attribute that represents primary key may have `autoIncrement` property set to `true`.
 2. This automatically forces attribute type to `string` and supersedes any other declarations. The adapter will give a warning message is there is a discrepancy.
 3. The value of the primary key cannot be overridden by `create()` or `update()` calls once `autoIncrement` property is enabled. You will see a (non-lethal) warning message if such attempt is made.
 
+> **Note**: This logic is inconsistent with the current Sails/Waterline specifications as it requires `autoIncrement` field to be of type `integer`. Please use this on your own discretion. 
+
 ### Type conversion between Cassandra and Sails/Waterline
 
-Direct mappings inside of `sails-cassandra`:
+The following table represents mappings between Sails/Waterline model data types and Apache Cassandra data types:
 
-| Sails/Waterline Type | Cassandra Type                    |
-|:---------------------|:----------------------------------|
-| string               | text (UTF-8 text)                 |
-| text                 | text (UTF-8 text)                 |
-| integer              | bigint (64-bit signed integer)    |
-| float                | double (64-bit float)             |
-| date                 | timestamp                         |
-| datetime             | timestamp                         |
-| boolean              | boolean                           |
-| binary               | blob                              |
-| array                | list<text>                        |
-| json                 | text (UTF-8 text)                 |
-| email                | ascii (US-ASCII character string) |
-| autoIncrement=true   | timeuuid                          |
+| Sails/Waterline Type | JS Type  | Cassandra Type                    |
+|:---------------------|:---------|:----------------------------------|
+| string               | String   | text (UTF-8 text)                 |
+| text                 | String   | text (UTF-8 text)                 |
+| integer              | Number   | bigint (64-bit signed integer)    |
+| float                | Number   | double (64-bit float)             |
+| date                 | Date     | timestamp                         |
+| datetime             | Date     | timestamp                         |
+| boolean              | Boolean  | boolean                           |
+| binary               | ?        | blob                              |
+| array                | Array    | list<text>                        |
+| json                 | Object(?)| text (UTF-8 text)                 |
+| email                | String   | ascii (US-ASCII character string) |
+| autoIncrement=true   | String   | timeuuid                          |
 
-> **Note:** The `cassanda-driver` module will try to find best match for types not represented in this table. For example, if a database was created by a different application and has column of type `uuid` then we can declare the corresponding model attribute as `string` and the driver will convert between these two automatically types. Please check `cassandra-driver` documentation for more details on this subject.
+The following table may be used as a guideline when creating Sails/Waterline models for existing tables:
 
-And this is reverse conversion:
+| Cassandra Type | Type Id | Driver JS type | Sails/Waterline Type |
+|:---------------|:-------:|:---------------|:---------------------|
+| ascii          | 1       | String         | string               |
+| bigint         | 2       | [Long]         | integer              |
+| blob           | 3       | Buffer         | binary               |
+| boolean        | 4       | Boolean        | boolean              |
+| counter        | 5       | [Long]         | integer              |
+| decimal        | 6       | [BigDecimal]   | float                |
+| double         | 7       | Number         | float                |
+| float          | 8       | Number         | float                |
+| inet           | 16      | [InetAddress]  | string               |
+| int            | 9       | Number         | integer              |
+| list           | 32      | Array          | array                |
+| map            | 33      | Object         | not supported (null) |
+| set            | 34      | Array          | not supported (null) |
+| text           | 10      | String         | text                 |
+| timestamp      | 11      | Date           | datetime or date     |
+| timeuuid       | 15      | [TimeUuid]     | string               |
+| uuid           | 12      | [Uuid]         | string               |
+| varchar        | 13      | String         | text                 |
+| varint         | 14      | [Integer]      | integer              |
 
-| Cassandra Type | Internal Type Id | Sails/Waterline Type |
-|:---------------|:----------------:|:---------------------|
-| ascii          | x                | string               |
-| bigint         | x                | integer              |
-| blob           | x                | binary               |
-| boolean        | x                | boolean              |
-| counter        | x                | integer              |
-| decimal        | x                | float                |
-| double         | x                | float                |
-| inet           | x                | string               |
-| int            | x                | integer              |
-| list           | x                | array of strings     |
-| map            | x                | not supported (null) |
-| set            | x                | not supported (null) |
-| text           | x                | text                 |
-| timestamp      | x                | datetime or date     |
-| timeuuid       | x                | string               |
-| tuple (v2.1+)  | x                | not supported (null) |
-| uuid           | x                | string               |
-| varchar        | x                | text                 |
-| varint         | x                | integer              |
+[Long]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Long.html
 
-> **Note:** The `sails-cassandra` adapter maintains mappings between model and database data types at all times and it will perform an additional logic in order to get best possible match. For instance, cassandra type `timestamp` will be resolved either to `date` or `datatime` depending on attribute type definition in the model.
+[BigDecimal]: http://www.datastax.com/drivers/nodejs/2.0/module-types-BigDecimal.html
+
+[InetAddress]: http://www.datastax.com/drivers/nodejs/2.0/module-types-InetAddress.html
+
+[TimeUuid]: http://www.datastax.com/drivers/nodejs/2.0/module-types-TimeUuid.html
+
+[Uuid]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Uuid.html
+
+[Integer]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Integer.html
+
+> **Note:** The `sails-cassandra` adapter maintains mappings between model and database data types at all times and it will perform an additional conversion between data type returned by the driver into types prefered by Sails/Waterline. For instance, cassandra type `timeuuid` will be converted to `string` when reading from the database even though `cassandra-driver` returns `TimeUuid` type.
