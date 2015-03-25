@@ -17,7 +17,6 @@ options are as follows:
 ```javascript
 module.exports.connections = {
 
-  // name of your connection
   my-cassandra-connection: {
 
     module        : 'sails-cassandra',
