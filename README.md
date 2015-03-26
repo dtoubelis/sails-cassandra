@@ -4,7 +4,7 @@
 Apache Cassanda database adapter for Sails/Waterline
 
 
-## Installation
+## 1. Installation
 Install from NPM.
 
 ```bash
@@ -12,7 +12,7 @@ Install from NPM.
 $ npm install sails-cassandra
 ```
 
-## Configuring Sail
+## 2. Configuring Sail
 Add the `cassandra` configuration to the `config/connections.js` file. The basic
 options are as follows:
 
@@ -56,7 +56,7 @@ an existing value. This also means that if you wish to use your own `authProvide
 you will need to remove `user` and `password` from the configuration.  
 
 
-## Running Tests
+## 3. Running Tests
 You can set environment variables to override the default database configuration
 for running tests as follows:
 
@@ -76,12 +76,12 @@ Default settings are:
 }
 ```
 
-## Implementation Notes
+## 4. Implementation Notes
 This section describes behaviour of Apache Cassandra adapter distinct from other
 database types.
 
 
-### Naming of tables and columns
+### 4.1. Naming of tables and columns
 Column and table names in Cassandra are case insensitive and this ambiguity
 makes it difficult to map between attribute names that are case sensitive and
 column names that are not. There are two possible workarounds for this:
@@ -97,7 +97,7 @@ column names that are not. There are two possible workarounds for this:
    the current preferred approach.
 
 
-### Autoincrement
+### 4.2. Autoincrement
 The autoincrement feature was plaguing ORM frameworks right from their inseption
 as it requires 1-2 extra queries in order to retrieve new record identifier from
 underlying database into the framework. It also does not work very well with
@@ -127,7 +127,7 @@ achieve the same functionality using the following rules:
 > Please use this on your own discretion. 
 
 
-### Type conversion between Cassandra and Sails/Waterline
+### 4.3. Type conversion between Cassandra and Sails/Waterline
 The following table represents mappings between Sails/Waterline model data types
 and Apache Cassandra data types:
 
@@ -192,7 +192,7 @@ models for existing tables:
 > `TimeUuid` type.
 
 
-### Use of indexes
+### 4.4. Use of indexes
 Apache Cassandra require index on a column that is used in `where` clause of
 `select` statement and unlike other database it will produce and exception if
 the index is missing.
@@ -207,45 +207,30 @@ will create indexes for attributes with `index` or `unique` attributes set to
 > own code. The `unique` attribute property is considered an alias for `index`
 > and both are treated in the exactly same way.
 
-### Search criteria
+### 4.5. Search criteria
 Apache Cassandra only supports subset of operation in selection criteria in
 comparison to relational databases and this section describes what is currently
 supported.
 
 
-#### Key Pairs
-This criteria:
+#### 4.5.1. Key Pairs
+This is an exact match criteria and it is declared as follows:
 
 ```javascript
 Model.find({firstName: 'Joe', lastName: 'Doe'});
 ```
 
-is supported and it will be executed as follows:
+It is supported and it will be executed as follows:
 
 ```
 SELECT id, first_name, last_name
   FROM users
   WHERE first_name = 'Joe' AND last_name = 'Doe';
 ```
+Please also refer to [Use of Indexes](#4.4. Use of indexes) above.
 
 
-#### In Pairs
-This criteria:
-
-```javascript
-Model.find({title: ['Mr', 'Mrs']});
-```
-
-will be rendered into the following CQL statement:
-
-```
-SELECT id, first_name, last_name
-  FROM users
-  WHERE title IN ( 'Mr', 'Mrs' );
-```
-
-
-#### Modified Pair
+#### 4.5.2. Modified Pair
 This criteria:
 
 ```javascript
@@ -268,20 +253,62 @@ and supported operations are as follows:
 | `'lessThenOrEqual'`    |  `'<='`   |    Yes    |
 | `'greaterThen'`        |  `'>'`    |    Yes    |
 | `'greaterThenOrEqual'` |  `'>='`   |    Yes    |
-| `'not'`                |  `'!'`    |    No     |
-| `'like'`               |  `none`   |    No     |
-| `'contains'`           |  `none`   |    No     |
-| `'startsWith'`         |  `none`   |    No     |
-| `'endsWith'`           |  `none`   |    No     |
+| `'not'`                |  `'!'`    |  **No**   |
+| `'like'`               |  `none`   |  **No**   |
+| `'contains'`           |  `none`   |  **No**   |
+| `'startsWith'`         |  `none`   |  **No**   |
+| `'endsWith'`           |  `none`   |  **No**   |
+
     
+#### 4.5.3. In Pairs
+This criteria:
 
-#### Or Pairs
-Not supported since Apache Cassandra has no `OR` criterion.
+```javascript
+Model.find({title: ['Mr', 'Mrs']});
+```
 
-#### Limit, Skip, Sort
+will be rendered into the following CQL statement:
+
+```
+SELECT id, first_name, last_name
+  FROM users
+  WHERE title IN ( 'Mr', 'Mrs' );
+```
+> **Note:** that `IN` criterion works differently in Apache Cassandra. It is
+> subject of [certain limitations] and is considered a pattern to be avoided.
+
+[certain limitations]: http://www.datastax.com/documentation/cql/3.1/cql/cql_reference/select_r.html?scroll=reference_ds_d35_v2q_xj__selectIN
+
+
+#### 4.5.4. Not-In Pair
+**Not supported** since Apache Cassandra does not support `NOT IN` criterion,
+so this construct:
+
+```javascript
+Model.find({name: {'!': ['Walter', 'Skyler']}});
+```
+
+will cause adapter to throw an exception.
+
+
+#### 4.5.5. Or Pairs
+**Not supported** since Apache Cassandra has no `OR` criterion, so this construct:
+
+```javascript
+Model.find({
+  or : [
+    {name: 'walter'},
+    {occupation: 'teacher'}
+  ]
+});
+```
+
+will cause the adapter to throw an exception.
+
+#### 4.5.6. Limit, Skip, Sort
 Currently not implemented however work on these features has started.
 
 
-## License
+## 5. License
 See [LICENSE.md](./LICENSE.md) file for details.
 
