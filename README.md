@@ -97,22 +97,6 @@ column names that are not. There are two possible workarounds for this:
    the current preferred approach.
 
 
-### Use of indexes
-Apache Cassandra require index on a column that is used in `where` clause of
-`select` statement and unlike other database it will produce and exception if
-the index is missing.
-
-Sails/Waterline allows to set `index` or `unique` properties on model
-attributes. The `sails-cassanda` adapter will respect these attributes and it
-will create indexes for attributes with `index` or `unique` attributes set to
-`true`.
-
-> **Note**: that Apache Cassandra have no notion of `unique` constraint and
-> the uniqueness has to be enforced either by Sails/Waterline core or in your
-> own code. The `unique` attribute property is considered an alias for `index`
-> and both are treated in the exactly same way.
-
-
 ### Autoincrement
 The autoincrement feature was plaguing ORM frameworks right from their inseption
 as it requires 1-2 extra queries in order to retrieve new record identifier from
@@ -206,6 +190,96 @@ models for existing tables:
 > Sails/Waterline. For instance, cassandra type `timeuuid` will be converted to
 > `string` when reading from the database even though `cassandra-driver` returns
 > `TimeUuid` type.
+
+
+### Use of indexes
+Apache Cassandra require index on a column that is used in `where` clause of
+`select` statement and unlike other database it will produce and exception if
+the index is missing.
+
+Sails/Waterline allows to set `index` or `unique` properties on model
+attributes. The `sails-cassanda` adapter will respect these attributes and it
+will create indexes for attributes with `index` or `unique` attributes set to
+`true`.
+
+> **Note**: that Apache Cassandra have no notion of `unique` constraint and
+> the uniqueness has to be enforced either by Sails/Waterline core or in your
+> own code. The `unique` attribute property is considered an alias for `index`
+> and both are treated in the exactly same way.
+
+### Search criteria
+Apache Cassandra only supports subset of operation in selection criteria in
+comparison to relational databases and this section describes what is currently
+supported.
+
+
+#### Key Pairs
+This criteria:
+
+```javascript
+Model.find({firstName: 'Joe', lastName: 'Doe'});
+```
+
+is supported and it will be executed as follows:
+
+```
+SELECT id, first_name, last_name
+  FROM users
+  WHERE first_name = 'Joe' AND last_name = 'Doe';
+```
+
+
+#### In Pairs
+This criteria:
+
+```javascript
+Model.find({title: ['Mr', 'Mrs']});
+```
+
+will be rendered into the following CQL statement:
+
+```
+SELECT id, first_name, last_name
+  FROM users
+  WHERE title IN ( 'Mr', 'Mrs' );
+```
+
+
+#### Modified Pair
+This criteria:
+
+```javascript
+Model.find({age: {'>': 18, 'lessThenOrEqual': 65});
+```
+
+will be converted to CQL query that may look like this:
+
+```
+SELECT id,first_name,last_name
+  FROM users
+  WHERE age > 18 AND age <= 65;
+```
+
+and supported operations are as follows:
+
+| Operation              | Shorthand | Supported |
+|:-----------------------|:---------:|:---------:|
+| `'lessThen'`           |  `'<'`    |    Yes    |
+| `'lessThenOrEqual'`    |  `'<='`   |    Yes    |
+| `'greaterThen'`        |  `'>'`    |    Yes    |
+| `'greaterThenOrEqual'` |  `'>='`   |    Yes    |
+| `'not'`                |  `'!'`    |    No     |
+| `'like'`               |  `none`   |    No     |
+| `'contains'`           |  `none`   |    No     |
+| `'startsWith'`         |  `none`   |    No     |
+| `'endsWith'`           |  `none`   |    No     |
+    
+
+#### Or Pairs
+Not supported since Apache Cassandra has no `OR` criterion.
+
+#### Limit, Skip, Sort
+Currently not implemented however work on these features has started.
 
 
 ## License
