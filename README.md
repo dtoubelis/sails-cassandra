@@ -124,7 +124,9 @@ achieve the same functionality using the following rules:
 
 > **Note**: This logic is inconsistent with the current Sails/Waterline
 > specifications as it requires `autoIncrement` field to be of type `integer`.
-> Please use this on your own discretion. 
+> Please use discretion. Also, see [this issue].
+
+[this issue]: https://github.com/balderdashy/waterline/issues/909
 
 
 ### 4.3. Type conversion between Cassandra and Sails/Waterline
