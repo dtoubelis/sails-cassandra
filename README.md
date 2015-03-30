@@ -227,7 +227,8 @@ It is supported and it will be executed as follows:
 ```
 SELECT id, first_name, last_name
   FROM users
-  WHERE first_name = 'Joe' AND last_name = 'Doe';
+  WHERE first_name = 'Joe' AND last_name = 'Doe'
+  ALLOW FILTERING;
 ```
 Please also refer to [Use of Indexes](#4.4. Use of indexes) above.
 
@@ -244,7 +245,8 @@ will be converted to CQL query that may look like this:
 ```
 SELECT id,first_name,last_name
   FROM users
-  WHERE age > 18 AND age <= 65;
+  WHERE age > 18 AND age <= 65
+  ALLOW FILTERING;
 ```
 
 and supported operations are as follows:
@@ -274,7 +276,8 @@ will be rendered into the following CQL statement:
 ```
 SELECT id, first_name, last_name
   FROM users
-  WHERE title IN ( 'Mr', 'Mrs' );
+  WHERE title IN ( 'Mr', 'Mrs' )
+  ALLOW FILTERING;
 ```
 > **Note:** that `IN` criterion works differently in Apache Cassandra. It is
 > subject of [certain limitations] and is considered a pattern to be avoided.
@@ -308,7 +311,7 @@ Model.find({
 will cause the adapter to throw an exception.
 
 #### 4.5.6. Limit, Skip, Sort
-Currently not implemented however work on these features has started.
+Only `limit` is curently implemented and `skip` and `sort` are silently ignored.
 
 
 ## 5. License

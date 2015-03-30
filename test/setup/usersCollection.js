@@ -28,9 +28,9 @@ module.exports = Waterline.Collection.extend({
       columnName: 'last_name',
       index: true
     },
-    email: {
+    emailAddress: {
       type: 'string',
-      columnName: 'email_address',
+//      columnName: 'emailaddress',
       index: true
     },
     avatar: {

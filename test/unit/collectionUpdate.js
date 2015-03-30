@@ -58,15 +58,15 @@ describe('Collection', function() {
         dob: new Date('1900-01-15 EST')
       };
       model.create(userNew, function(err, result) {
-        if (err) return done(err);
+        assert.ifError(err);
         id = result.id;
         done();
       });
     });
 
-    it.skip('should verify the new user', function(done) {
+    it('should verify the new user', function(done) {
       model.find(id, function(err, user) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert(_.isArray(user));
         assert.equal(user.length, 1);
         done();
@@ -75,14 +75,19 @@ describe('Collection', function() {
 
     it('should destroy the new user', function(done) {
       model.destroy(id, function(err, result) {
-        if (err) return done(err);
+        assert.ifError(err);
         done ();
       });
     });
 
 
-    it.skip('should confirm that user is gone', function(done) {
-      done();
+    it('should confirm that user is gone', function(done) {
+      model.find(id, function(err, user) {
+        assert.ifError(err);
+        assert(_.isArray(user));
+        assert.equal(user.length, 0);
+        done();
+      });
     });
 
   });
@@ -92,13 +97,16 @@ describe('Collection', function() {
 
     var users = [];
     var lastName;
+    var emailAddress;
 
     before(function(done) {
       lastName = 'Doe_' + _.random(1000000, 9999999);
+      emailAddress = 'joe@' + lastName.toLowerCase() + '.com';
       for (var i=0; i<3; i++) {
         users.push({
           firstName: 'Joe_' + i,
           lastName: lastName,
+          emailAddress: emailAddress
         });
       }
       done();
@@ -106,26 +114,36 @@ describe('Collection', function() {
 
     it('should create 3 new users', function(done) {
       model.create(users, function(err, result) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert(_.isArray(result));
         assert.equal(result.length, 3);
         done();
       });
     });
 
-    it.skip('should verify that users exist', function(done) {
-      done();
-    });
-
-    it('should destroy users using search criteria', function(done) {
-      model.destroy({lastName: lastName}, function(err) {
-        if (err) return done(err);
+    it('should verify that users exist', function(done) {
+      model.find({lastName: lastName}, function(err, users) {
+        assert.ifError(err);
+        assert(_.isArray(users));
+        assert.equal(users.length, 3);
         done();
       });
     });
 
-    it.skip('should verify that users are gone', function(done) {
-      done();
+    it('should destroy users using search criteria', function(done) {
+      model.destroy({lastName: lastName, emailAddress: emailAddress}, function(err) {
+        assert.ifError(err);
+        done();
+      });
+    });
+
+    it('should verify that users are gone', function(done) {
+      model.find({lastName: lastName}, function(err, users) {
+        assert.ifError(err);
+        assert(_.isArray(users));
+        assert.equal(users.length, 0);
+        done();
+      });
     });
 
   });
