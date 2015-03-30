@@ -5,7 +5,7 @@ node_js:
 services:
   - cassandra
 before_script:
-  - echo 'Change me!!!'
+  - cqlsh -e "CREATE KEYSPACE test WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };"
 notifications:
   email:
     - dmitri.toubelis@alkeron.com
