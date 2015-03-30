@@ -1,6 +1,6 @@
-var Waterline = require('waterline'),
-    adapter = require('../../lib/adapter'),
-    Users = require('../setup/usersCollection'),
+var adapter = require('../../lib/adapter'),
+    Waterline = require('waterline'),
+    Users = require('../setup/modelUsers'),
     assert = require('assert'),
     _ = require('lodash');
 
@@ -152,18 +152,20 @@ describe('Collection', function() {
   describe('.update()', function() {
 
     var users = [];
+    var lastName;
 
     before(function(done) {
-      var u = [{firstName: 'Dima', lastName: 'Two'}];
+      lastName = 'Carter' + _.random(1000000, 9999999);
+      users.push({firstName: 'John', lastName: lastName});
       for (var i=0; i<3; i++) {
-        u.push({
-          firstName: 'Joe_' + i,
-          lastName: 'Katsman',
+        users.push({
+          firstName: 'John_' + i,
+          lastName: lastName,
         });
       }
-      model.create(u, function(err, res) {
+      model.create(users, function(err, result) {
         if (err) return done(err);
-        users = res;
+        users = result;
         done();
       });
     });
@@ -171,18 +173,32 @@ describe('Collection', function() {
 
     it('update one user by PK', function(done) {
       model.update(users[0].id, {age: 99}, function(err, result) {
-        if (err) return done(err);
-        assert.equal(users[0].id, result[0].id);
+        assert.ifError(err);
+        assert(_.isArray(result));
+        assert.equal(result.length, 1);
+        assert.equal(result[0].id, users[0].id);
+        assert.equal(result[0].age, 99);
         done();
       });
     });
 
 
     it('update multiple users', function(done) {
-      model.update({lastName: 'Katsman'}, {age: 44}, function(err, result) {
-        if (err) return done(err);
+      var i;
+      model.update({lastName: lastName}, {age: 44}, function(err, result) {
+        assert.ifError(err);
+        assert(_.isArray(result));
+        assert.equal(result.length, users.length);
+        for (i=0; i<result.length; i++) {
+          assert.equal(result[i].age, 44);
+        }
         done();
       });
+    });
+
+
+    after(function(done) {
+      model.destroy({lastName: lastName}, done);
     });
 
   });
