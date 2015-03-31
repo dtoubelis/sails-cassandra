@@ -2,7 +2,14 @@
 > completely functional yet (even if documentation says so). Please wait for
 > the first release if you want to use it in your project.
 
-[![Build Status](https://travis-ci.org/dtoubelis/sails-cassandra.svg?branch=master)](https://travis-ci.org/dtoubelis/sails-cassandra) [![Dependency Status](https://gemnasium.com/dtoubelis/sails-cassandra.svg)](https://gemnasium.com/dtoubelis/sails-cassandra)
+[![Build Status][buildImg]][buildURL] [![Dependency Status][depImg]][depURL]
+
+[buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra.svg?branch=master
+[buildURL]: https://travis-ci.org/dtoubelis/sails-cassandra
+
+[depImg]: https://gemnasium.com/dtoubelis/sails-cassandra.svg
+[depURL]: https://gemnasium.com/dtoubelis/sails-cassandra
+
 
 # sails-cassandra
 Apache Cassanda 2.+ database adapter for Sails/Waterline
