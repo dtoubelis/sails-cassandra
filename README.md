@@ -2,7 +2,7 @@
 > completely functional yet (even if documentation says so). Please wait for
 > the first release if you want to use it in your project.
 
-[![Build Status][buildImg]][buildURL] [![Dependency Status][depImg]][depURL]
+[![Build Status][buildImg]][buildURL] [![Dependency Status][depImg]][depURL] [![npmImg][npmImg]][npmURL]
 
 [buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra.svg?branch=master
 [buildURL]: https://travis-ci.org/dtoubelis/sails-cassandra
@@ -10,9 +10,15 @@
 [depImg]: https://gemnasium.com/dtoubelis/sails-cassandra.svg
 [depURL]: https://gemnasium.com/dtoubelis/sails-cassandra
 
+[npmImg]: https://badge.fury.io/js/sails-cassandra.svg
+[npmURL]: http://badge.fury.io/js/sails-cassandra
+
 
 # sails-cassandra
 Apache Cassanda 2.+ database adapter for Sails/Waterline
+
+> Implements:
+> - Selmantic (since v0.0.3)
 
 
 ## 1. Installation
