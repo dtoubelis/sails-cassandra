@@ -1,6 +1,6 @@
 var adapter = require('../../lib/adapter'),
     Waterline = require('waterline'),
-    Users = require('../setup/modelUsers'),
+    Users = require('../setup/collectionUsers'),
     assert = require('assert'),
     _ = require('lodash');
 

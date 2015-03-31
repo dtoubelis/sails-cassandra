@@ -23,13 +23,13 @@
     "cassandra-driver": "~2.0.0",
     "long": "~2.2.0",
     "async": "~0.9.0",
-    "lodash": "~2.4.1",
+    "lodash": "~2.4.0",
     "waterline-errors": "~0.10.0",
     "waterline-sequel": "~0.1.1",
     "waterline-cursor": "~0.0.5"
   },
   "devDependencies": {
-    "mocha": "~1.13.0",
+    "mocha": "~2.2.0",
     "captains-log": "~0.11.5",
     "waterline": "~0.10.0",
     "waterline-adapter-tests": "~0.10.7"
