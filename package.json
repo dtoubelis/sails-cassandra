@@ -1,14 +1,27 @@
 {
   "name": "sails-cassandra",
+  "description": "Apache Cassandra 2.x adapter for Sails/Waterline",
   "version": "0.0.3",
-  "description": "Apache Cassandra adapter for Sails.js",
-  "main": "./lib/adapter.js",
+  "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
+  "contributors": [
+    {
+      "name": "dtoubelis",
+      "github": "https://github.com/dtoubelis"
+    }
+  ],
   "scripts": {
     "test": "make test"
   },
+  "main": "./lib/adapter.js",
+  "engines": {
+     "node": ">=0.10.0"
+   },
   "repository": {
     "type": "git",
     "url": "git://github.com/dtoubelis/sails-cassandra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dtoubelis/sails-cassandra/issues"
   },
   "keywords": [
     "sails",
@@ -16,9 +29,6 @@
     "cassandra",
     "orm"
   ],
-  "author": "Alkeron Multimedia",
-  "license": "MIT",
-  "readmeFilename": "README.md",
   "dependencies": {
     "cassandra-driver": "~2.0.0",
     "long": "~2.2.0",
@@ -39,5 +49,6 @@
     "interfaces": [
       "semantic"
     ]
-  }
+  },
+  "license": "MIT"
 }
