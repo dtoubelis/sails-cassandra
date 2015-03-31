@@ -1,7 +1,3 @@
-> **Note:** This project is under active development and the adapter is not
-> completely functional yet (even if documentation says so). Please wait for
-> the first release if you want to use it in your project.
-
 [![Build Status][buildImg]][buildURL] [![Dependency Status][depImg]][depURL] [![npmImg][npmImg]][npmURL]
 
 [buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra.svg?branch=master
