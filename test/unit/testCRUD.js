@@ -32,7 +32,7 @@ describe('Collection', function() {
       },
 
       defaults: {
-        migrate: 'safe'
+        migrate: 'drop'
       }
 
     };

@@ -14,9 +14,7 @@
 Apache Cassanda 2.+ database adapter for Sails/Waterline
 
 > Implements:
-> - [Semantic] (since v0.0.3)
-
-[Semantic]: https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#semantic-interface
+> - [Semantic](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#semantic-interface)
 
 
 ## 1. Installation
