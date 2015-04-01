@@ -14,7 +14,9 @@
 Apache Cassanda 2.+ database adapter for Sails/Waterline
 
 > Implements:
-> - Selmantic (since v0.0.3)
+> - [Semantic] (since v0.0.3)
+
+[Semantic]: https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#semantic-interface
 
 
 ## 1. Installation
@@ -25,7 +27,7 @@ Install from NPM.
 $ npm install sails-cassandra
 ```
 
-## 2. Configuring Sail
+## 2. Configuring Sails
 Add the `cassandra` configuration to the `config/connections.js` file. The basic
 options are as follows:
 
