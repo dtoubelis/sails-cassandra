@@ -89,9 +89,13 @@ Default settings are:
 }
 ```
 
+> **Note:** Default name of the keyspace for running tests is `test`. Make
+> sure you created it in your database before executing `npm test`.
+
+
 ## 4. Implementation Notes
-This section describes behaviour of Apache Cassandra adapter distinct from other
-database types.
+This section describes behaviour of Apache Cassandra adapter that is distinct
+from other database types.
 
 
 ### 4.1. Naming of tables and columns
@@ -155,9 +159,9 @@ and Apache Cassandra data types:
 | date                 | Date     | timestamp                         |
 | datetime             | Date     | timestamp                         |
 | boolean              | Boolean  | boolean                           |
-| binary               | ?        | blob                              |
+| binary               | ???      | blob                              |
 | array                | Array    | list<text>                        |
-| json                 | Object(?)| text (UTF-8 text)                 |
+| json                 | ???      | text (UTF-8 text)                 |
 | email                | String   | ascii (US-ASCII character string) |
 | autoIncrement=true   | String   | timeuuid                          |
 
@@ -165,27 +169,27 @@ and Apache Cassandra data types:
 The following table may be used as a guideline when creating Sails/Waterline
 models for existing tables:
 
-| Cassandra Type | Type Id | Driver JS type | Sails/Waterline Type |
-|:---------------|:-------:|:---------------|:---------------------|
-| ascii          | 1       | String         | string               |
-| bigint         | 2       | [Long]         | integer              |
-| blob           | 3       | Buffer         | binary               |
-| boolean        | 4       | Boolean        | boolean              |
-| counter        | 5       | [Long]         | integer              |
-| decimal        | 6       | [BigDecimal]   | float                |
-| double         | 7       | Number         | float                |
-| float          | 8       | Number         | float                |
-| inet           | 16      | [InetAddress]  | string               |
-| int            | 9       | Number         | integer              |
-| list           | 32      | Array          | array                |
-| map            | 33      | Object         | not supported (null) |
-| set            | 34      | Array          | not supported (null) |
-| text           | 10      | String         | text                 |
-| timestamp      | 11      | Date           | datetime or date     |
-| timeuuid       | 15      | [TimeUuid]     | string               |
-| uuid           | 12      | [Uuid]         | string               |
-| varchar        | 13      | String         | text                 |
-| varint         | 14      | [Integer]      | integer              |
+| Cassandra Type | Type Id | Driver JS type | Waterline JS Type | Waterline Type       |
+|:---------------|:-------:|:---------------|:------------------|:---------------------|
+| ascii          | 1       | String         | String            | string               |
+| bigint         | 2       | [Long]         | Number or NaN     | integer              |
+| blob           | 3       | Buffer         | ???               | binary               |
+| boolean        | 4       | Boolean        | Boolean           | boolean              |
+| counter        | 5       | [Long]         | Number or NaN     | integer              |
+| decimal        | 6       | [BigDecimal]   | Number or NaN     | float                |
+| double         | 7       | Number         | Number            | float                |
+| float          | 8       | Number         | Number            | float                |
+| inet           | 16      | [InetAddress]  | String            | string               |
+| int            | 9       | Number         | Number            | integer              |
+| list           | 32      | Array          | Array             | array                |
+| map            | 33      | Object         | Null              | not supported (null) |
+| set            | 34      | Array          | Null              | not supported (null) |
+| text           | 10      | String         | String            | text                 |
+| timestamp      | 11      | Date           | Date              | datetime or date     |
+| timeuuid       | 15      | [TimeUuid]     | String            | string               |
+| uuid           | 12      | [Uuid]         | String            | string               |
+| varchar        | 13      | String         | String            | text                 |
+| varint         | 14      | [Integer]      | Number or NaN     | integer              |
 
 [Long]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Long.html
 
@@ -198,13 +202,6 @@ models for existing tables:
 [Uuid]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Uuid.html
 
 [Integer]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Integer.html
-
-> **Note:** The `sails-cassandra` adapter maintains mappings between model and
-> database data types at all times and it will perform an additional conversion
-> between data type returned by the driver into types prefered by
-> Sails/Waterline. For instance, cassandra type `timeuuid` will be converted to
-> `string` when reading from the database even though `cassandra-driver` returns
-> `TimeUuid` type.
 
 
 ### 4.4. Use of indexes
@@ -323,8 +320,9 @@ Model.find({
 
 will cause the adapter to throw an exception.
 
-#### 4.5.6. Limit, Skip, Sort
-Only `limit` is curently implemented and `skip` and `sort` are silently ignored.
+#### 4.5.6. Limit, Sort, Skip
+Only `limit` is curently implemented and works as expected. `sort` and `skip` are
+not supported and silently ignored if provided.
 
 
 ## 5. License
