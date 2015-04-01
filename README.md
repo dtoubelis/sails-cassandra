@@ -250,7 +250,7 @@ Please also refer to [Use of Indexes](#4.4. Use of indexes) above.
 This criteria:
 
 ```javascript
-Model.find({age: {'>': 18, 'lessThenOrEqual': 65});
+Model.find({age: {'>': 18, 'lessThanOrEqual': 65});
 ```
 
 will be converted to CQL query that may look like this:
@@ -266,10 +266,10 @@ and supported operations are as follows:
 
 | Operation              | Shorthand | Supported |
 |:-----------------------|:---------:|:---------:|
-| `'lessThen'`           |  `'<'`    |    Yes    |
-| `'lessThenOrEqual'`    |  `'<='`   |    Yes    |
-| `'greaterThen'`        |  `'>'`    |    Yes    |
-| `'greaterThenOrEqual'` |  `'>='`   |    Yes    |
+| `'lessThan'`           |  `'<'`    |    Yes    |
+| `'lessThanOrEqual'`    |  `'<='`   |    Yes    |
+| `'greaterThan'`        |  `'>'`    |    Yes    |
+| `'greaterThanOrEqual'` |  `'>='`   |    Yes    |
 | `'not'`                |  `'!'`    |  **No**   |
 | `'like'`               |  `none`   |  **No**   |
 | `'contains'`           |  `none`   |  **No**   |

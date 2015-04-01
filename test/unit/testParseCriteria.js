@@ -74,7 +74,7 @@ describe('Query type', function() {
 
 
   describe('"modified multi-pair":', function() {
-    var query = {age: {'>=': 40, 'lessThen': 50}};
+    var query = {age: {'>=': 40, 'lessThan': 50}};
     var cql = "age >= ? AND age < ?";
     var params = [ 40, 50 ];
     it ("should return valid CQL", function() {
@@ -90,7 +90,7 @@ describe('Query type', function() {
     var query = {
       title: [ 'Mr', 'Mrs' ],
       lastName: 'Doe',
-      age: {'greaterThenOrEqual': 25, '<': 50}
+      age: {'greaterThanOrEqual': 25, '<': 50}
     };
     var cql = "title IN (?) AND lastname = ? AND age >= ? AND age < ?";
     var params = [ [ 'Mr', 'Mrs' ], 'Doe', 25, 50 ];
