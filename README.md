@@ -22,6 +22,7 @@ Apache Cassanda 2.+ database adapter for Sails/Waterline
 >   - .destroy()
 > - [Migratable](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#migratable-interface)
 >   - .define()
+>   - .describe()
 >   - .drop()
 
 
