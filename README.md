@@ -169,7 +169,7 @@ and Apache Cassandra data types:
 | date                 | Date     | timestamp                         |
 | datetime             | Date     | timestamp                         |
 | boolean              | Boolean  | boolean                           |
-| binary               | ???      | blob                              |
+| binary               | [Buffer] | blob                              |
 | array                | Array    | list<text>                        |
 | json                 | ???      | text (UTF-8 text)                 |
 | email                | String   | ascii (US-ASCII character string) |
@@ -183,7 +183,7 @@ models for existing tables:
 |:---------------|:-------:|:---------------|:------------------|:---------------------|
 | ascii          | 1       | String         | String            | string               |
 | bigint         | 2       | [Long]         | Number or NaN     | integer              |
-| blob           | 3       | Buffer         | ???               | binary               |
+| blob           | 3       | [Buffer]       | [Buffer]          | binary               |
 | boolean        | 4       | Boolean        | Boolean           | boolean              |
 | counter        | 5       | [Long]         | Number or NaN     | integer              |
 | decimal        | 6       | [BigDecimal]   | Number or NaN     | float                |
@@ -200,6 +200,8 @@ models for existing tables:
 | uuid           | 12      | [Uuid]         | String            | string               |
 | varchar        | 13      | String         | String            | text                 |
 | varint         | 14      | [Integer]      | Number or NaN     | integer              |
+
+[Buffer]: https://nodejs.org/api/buffer.html
 
 [Long]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Long.html
 

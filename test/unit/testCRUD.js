@@ -55,6 +55,7 @@ describe('Collection', function() {
       var userNew = {
         firstName: 'Joe',
         lastName: 'Doe',
+//        avatar: new Buffer(32 * 1024),
         dob: new Date('1900-01-15 EST')
       };
       model.create(userNew, function(err, result) {
