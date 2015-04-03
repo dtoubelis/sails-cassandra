@@ -40,7 +40,7 @@ describe('Collection', function() {
     waterline.loadCollection(Users);
 
     waterline.initialize(config, function(err, models) {
-      if(err) return done(err);
+      if(err) return done();
       model = models.collections.users;
       done();
     });
@@ -55,11 +55,11 @@ describe('Collection', function() {
       var userNew = {
         firstName: 'Joe',
         lastName: 'Doe',
-//        avatar: new Buffer(32 * 1024),
+        avatar: new Buffer(32 * 1024),
         dob: new Date('1900-01-15 EST')
       };
       model.create(userNew, function(err, result) {
-        assert.ifError(err);
+        if (err) return done(err);
         id = result.id;
         done();
       });
@@ -93,7 +93,7 @@ describe('Collection', function() {
     it('should destroy the new user', function(done) {
       model.destroy(id, function(err, result) {
         assert.ifError(err);
-        done ();
+        done (err);
       });
     });
 
@@ -197,7 +197,7 @@ describe('Collection', function() {
         });
       }
       model.create(users, function(err, result) {
-        if (err) return done(err);
+        if (err) return done();
         users = result;
         done();
       });
