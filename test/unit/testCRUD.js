@@ -32,7 +32,7 @@ describe('Collection', function() {
       },
 
       defaults: {
-        migrate: 'alter'
+        migrate: 'drop'
       }
 
     };
@@ -69,6 +69,14 @@ describe('Collection', function() {
         assert.ifError(err);
         assert(_.isArray(user));
         assert.equal(user.length, 1);
+        done();
+      });
+    });
+
+    it('should return user count of 1', function(done) {
+      model.count(id, function(err, userCount) {
+        assert.ifError(err);
+        assert.equal(userCount, 1);
         done();
       });
     });
@@ -126,6 +134,22 @@ describe('Collection', function() {
         assert.ifError(err);
         assert(_.isArray(users));
         assert.equal(users.length, 3);
+        done();
+      });
+    });
+
+    it('should return user count of 0', function(done) {
+      model.count({lastName: 'Nemo'}, function(err, userCount) {
+        assert.ifError(err);
+        assert.equal(userCount, 0);
+        done();
+      });
+    });
+
+    it('should return user count of 3', function(done) {
+      model.count({lastName: lastName}, function(err, userCount) {
+        assert.ifError(err);
+        assert.equal(userCount, 3);
         done();
       });
     });
