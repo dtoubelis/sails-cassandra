@@ -18,6 +18,7 @@ Apache Cassanda 2.+ database adapter for Sails/Waterline
 >   - .create()
 >   - .createEach()
 >   - .find()
+>   - .count()
 >   - .update()
 >   - .destroy()
 > - [Migratable](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#migratable-interface)
