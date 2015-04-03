@@ -32,7 +32,7 @@ describe('Collection', function() {
       },
 
       defaults: {
-        migrate: 'drop'
+        migrate: 'alter'
       }
 
     };
@@ -69,6 +69,14 @@ describe('Collection', function() {
         assert.ifError(err);
         assert(_.isArray(user));
         assert.equal(user.length, 1);
+        done();
+      });
+    });
+
+    it('should return user count > 0', function(done) {
+      model.count(function(err, userCount) {
+        assert.ifError(err);
+        assert(userCount > 0);
         done();
       });
     });

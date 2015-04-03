@@ -22,7 +22,7 @@ describe('Query type', function() {
       }
     }, null);
 
-  describe('"pair":', function() {
+  describe('"pair"', function() {
     var query = {firstName: 'Joe'};
     var cql = "firstname = ?";
     var params = [ 'Joe' ];
@@ -34,7 +34,7 @@ describe('Query type', function() {
   });
 
 
-  describe('"multi-pair":', function() {
+  describe('"multi-pair"', function() {
     var query = {firstName: 'Joe',lastName: 'Doe'};
     var cql = "firstname = ? AND lastname = ?";
     var params = [ 'Joe', 'Doe' ];
@@ -47,7 +47,7 @@ describe('Query type', function() {
   });
 
 
-  describe('"in":', function() {
+  describe('"in"', function() {
     var query = {firstName: [ 'Joe', 'Peter', 'Greg' ]};
     var cql = "firstname IN (?)";
     var params = [ ['Joe', 'Peter', 'Greg'] ];
@@ -61,7 +61,7 @@ describe('Query type', function() {
   });
 
 
-  describe('"modified pair":', function() {
+  describe('"modified pair"', function() {
     var query = {firstName: {'<': 'Joe'}};
     var cql = "firstname < ?";
     var params = [ 'Joe' ];
@@ -73,7 +73,7 @@ describe('Query type', function() {
   });
 
 
-  describe('"modified multi-pair":', function() {
+  describe('"modified multi-pair"', function() {
     var query = {age: {'>=': 40, 'lessThan': 50}};
     var cql = "age >= ? AND age < ?";
     var params = [ 40, 50 ];
@@ -86,7 +86,7 @@ describe('Query type', function() {
   });
 
 
-  describe('"mixed":', function() {
+  describe('"mixed"', function() {
     var query = {
       title: [ 'Mr', 'Mrs' ],
       lastName: 'Doe',
