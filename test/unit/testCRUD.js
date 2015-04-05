@@ -2,7 +2,9 @@ var adapter = require('../../lib/adapter'),
     Waterline = require('waterline'),
     Users = require('../setup/collectionUsers'),
     assert = require('assert'),
+    through2 = require('through2'),
     _ = require('lodash');
+
 
 var connectionName = 'semantic';
 var collectionName = 'testUsers';
@@ -32,7 +34,7 @@ describe('Collection', function() {
       },
 
       defaults: {
-        migrate: 'alter'
+        migrate: 'drop'
       }
 
     };
@@ -182,6 +184,47 @@ describe('Collection', function() {
   });
 
 
+  describe('.stream()', function() {
+
+    var users = [];
+    var lastName;
+
+    before(function(done) {
+      lastName = 'Streamer' + _.random(1000000, 9999999);
+      for (var i=0; i<17; i++) {
+        users.push({
+          firstName: 'John_' + i,
+          lastName: lastName,
+        });
+      }
+      model.create(users, function(err, result) {
+        if (err) return done();
+        users = result;
+        done();
+      });
+    });
+
+
+    it('should return 17 objests as a JSON stream', function(done) {
+      var res = "";
+      var srcStream = model.stream({lastName: lastName});
+      srcStream.pipe(through2({ objectMode: true },
+        function(chunk, encoding, cb) {
+          res += chunk;
+          cb();
+        }
+      ))
+      .on('finish', function() {
+         var data = JSON.parse(res);
+         assert(_.isArray(data));
+         assert.equal(data.length, 17);
+         done();
+      });
+    });
+
+  });
+
+
   describe('.update()', function() {
 
     var users = [];
@@ -227,6 +270,7 @@ describe('Collection', function() {
         }
         done();
       });
+
     });
 
 
@@ -235,6 +279,5 @@ describe('Collection', function() {
     });
 
   });
-
 
 });
