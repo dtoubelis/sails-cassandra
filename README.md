@@ -25,6 +25,8 @@ Apache Cassanda 2.+ database adapter for Sails/Waterline
 >   - .define()
 >   - .describe()
 >   - .drop()
+> - [Iterable](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#iterable-interface)
+>   - .stream()
 
 
 ## 1. Installation
