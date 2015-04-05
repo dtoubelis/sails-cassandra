@@ -58,7 +58,8 @@ describe('Collection', function() {
         firstName: 'Joe',
         lastName: 'Doe',
         avatar: new Buffer(32 * 1024),
-        dob: new Date('1900-01-15 EST')
+        dob: new Date('1900-01-15 EST'),
+        list: ["brake", "duh!"]
       };
       model.create(userNew, function(err, result) {
         if (err) return done(err);
@@ -220,6 +221,10 @@ describe('Collection', function() {
          assert.equal(data.length, 17);
          done();
       });
+    });
+
+    after(function(done) {
+      model.destroy({lastName: lastName}, done);
     });
 
   });
