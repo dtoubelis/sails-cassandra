@@ -14,8 +14,8 @@
   },
   "main": "./lib/adapter.js",
   "engines": {
-     "node": ">=0.10.0"
-   },
+    "node": ">=0.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/dtoubelis/sails-cassandra.git"
@@ -30,16 +30,16 @@
     "orm"
   ],
   "dependencies": {
-    "cassandra-driver": "~2.0.0",
-    "long": "~2.2.0",
     "async": "~0.9.0",
+    "cassandra-driver": "~2.0.0",
     "lodash": "~2.4.0",
+    "long": "~2.2.0",
     "through2": "~0.6.3",
     "waterline-errors": "~0.10.0"
   },
   "devDependencies": {
-    "mocha": "~2.2.0",
     "captains-log": "~0.11.5",
+    "mocha": "~2.2.0",
     "waterline": "~0.10.0",
     "waterline-adapter-tests": "~0.10.7"
   },
