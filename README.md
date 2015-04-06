@@ -254,7 +254,7 @@ SELECT id, first_name, last_name
   WHERE first_name = 'Joe' AND last_name = 'Doe'
   ALLOW FILTERING;
 ```
-Please also refer to [Use of Indexes](#4.4. Use of indexes) above.
+Please also refer to [Use of Indexes](#44-use-of-indexes) above.
 
 
 #### 4.5.2. Modified Pair
