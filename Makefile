@@ -3,8 +3,9 @@ REPORTER = spec
 
 test: test-unit
 
-test-integration:
-	@NODE_ENV=test node test/integration/runner.js
+test-lint:
+	@NODE_ENV=test ./node_modules/.bin/jshint \
+		lib/*.js
 
 test-unit:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
@@ -12,8 +13,7 @@ test-unit:
 		$(MOCHA_OPTS) \
 		test/unit/*.js
 
-test-load:
-	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--reporter $(REPORTER) \
-		$(MOCHA_OPTS) \
-		test/load/*.js
+test-integration:
+	@NODE_ENV=test node test/integration/runner.js
+
+.PHONY: test test-lint test-unit test-integration

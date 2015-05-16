@@ -79,7 +79,7 @@ describe('Collection', function() {
 
     it('should return user count > 0', function(done) {
       model.count(function(err, userCount) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert(userCount > 0);
         done();
       });
@@ -87,7 +87,7 @@ describe('Collection', function() {
 
     it('should return user count of 1', function(done) {
       model.count(id, function(err, userCount) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert.equal(userCount, 1);
         done();
       });
@@ -95,7 +95,7 @@ describe('Collection', function() {
 
     it('should destroy the new user', function(done) {
       model.destroy(id, function(err, result) {
-        assert.ifError(err);
+        if (err) return done(err);
         done (err);
       });
     });
@@ -103,7 +103,7 @@ describe('Collection', function() {
 
     it('should confirm that user is gone', function(done) {
       model.find(id, function(err, user) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert(_.isArray(user));
         assert.equal(user.length, 0);
         done();
@@ -134,7 +134,7 @@ describe('Collection', function() {
 
     it('should create 3 new users', function(done) {
       model.create(users, function(err, result) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert(_.isArray(result));
         assert.equal(result.length, 3);
         done();
@@ -143,7 +143,7 @@ describe('Collection', function() {
 
     it('should verify that users exist', function(done) {
       model.find({lastName: lastName}, function(err, users) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert(_.isArray(users));
         assert.equal(users.length, 3);
         done();
@@ -152,7 +152,7 @@ describe('Collection', function() {
 
     it('should return user count of 0', function(done) {
       model.count({lastName: 'Nemo'}, function(err, userCount) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert.equal(userCount, 0);
         done();
       });
@@ -160,7 +160,7 @@ describe('Collection', function() {
 
     it('should return user count of 3', function(done) {
       model.count({lastName: lastName}, function(err, userCount) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert.equal(userCount, 3);
         done();
       });
@@ -168,14 +168,14 @@ describe('Collection', function() {
 
     it('should destroy users using search criteria', function(done) {
       model.destroy({lastName: lastName, emailAddress: emailAddress}, function(err) {
-        assert.ifError(err);
+        if (err) return done(err);
         done();
       });
     });
 
     it('should verify that users are gone', function(done) {
       model.find({lastName: lastName}, function(err, users) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert(_.isArray(users));
         assert.equal(users.length, 0);
         done();
@@ -254,7 +254,7 @@ describe('Collection', function() {
 
     it('update one user by PK', function(done) {
       model.update(users[0].id, {age: 99}, function(err, result) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert(_.isArray(result));
         assert.equal(result.length, 1);
         assert.equal(result[0].id, users[0].id);
@@ -267,7 +267,7 @@ describe('Collection', function() {
     it('update multiple users', function(done) {
       var i;
       model.update({lastName: lastName}, {age: 44}, function(err, result) {
-        assert.ifError(err);
+        if (err) return done(err);
         assert(_.isArray(result));
         assert.equal(result.length, users.length);
         for (i=0; i<result.length; i++) {
@@ -283,6 +283,28 @@ describe('Collection', function() {
       model.destroy({lastName: lastName}, done);
     });
 
+  });
+
+
+  describe('.insert()', function() {
+
+    var n = 100000;
+
+    it.skip('bulk insert ' + n + ' records.', function(done) {
+
+      this.timeout(0);
+
+      var items = [];
+      for (var i = 0; i < n; i++) {
+        items.push({firstName: 'Joe_' + i, lastName: 'Doe'});
+      }
+
+      model.create(items, function (err, result) {
+        if (err) return done(err);
+        assert(_.isArray(result));
+        done();
+      });
+    });
   });
 
 });
