@@ -24,7 +24,7 @@ describe('Query type', function() {
 
   describe('"pair"', function() {
     var query = {firstName: 'Joe'};
-    var cql = "firstname = ?";
+    var cql = '"firstname" = ?';
     var params = [ 'Joe' ];
     it("should return valid CQL", function() {
       var arr = collection._parseCriteria(query);
@@ -36,7 +36,7 @@ describe('Query type', function() {
 
   describe('"multi-pair"', function() {
     var query = {firstName: 'Joe',lastName: 'Doe'};
-    var cql = "firstname = ? AND lastname = ?";
+    var cql = '"firstname" = ? AND "lastname" = ?';
     var params = [ 'Joe', 'Doe' ];
     it ("should return valid CQL", function() {
       var arr = collection._parseCriteria(query);
@@ -49,7 +49,7 @@ describe('Query type', function() {
 
   describe('"in"', function() {
     var query = {firstName: [ 'Joe', 'Peter', 'Greg' ]};
-    var cql = "firstname IN (?)";
+    var cql = '"firstname" IN (?)';
     var params = [ ['Joe', 'Peter', 'Greg'] ];
     it ("should return valid CQL", function() {
       var arr = collection._parseCriteria(query);
@@ -63,7 +63,7 @@ describe('Query type', function() {
 
   describe('"modified pair"', function() {
     var query = {firstName: {'<': 'Joe'}};
-    var cql = "firstname < ?";
+    var cql = '"firstname" < ?';
     var params = [ 'Joe' ];
     it ("should return valid CQL", function() {
       var arr = collection._parseCriteria(query);
@@ -75,7 +75,7 @@ describe('Query type', function() {
 
   describe('"modified multi-pair"', function() {
     var query = {age: {'>=': 40, 'lessThan': 50}};
-    var cql = "age >= ? AND age < ?";
+    var cql = '"age" >= ? AND "age" < ?';
     var params = [ 40, 50 ];
     it ("should return valid CQL", function() {
       var arr = collection._parseCriteria(query);
@@ -92,7 +92,7 @@ describe('Query type', function() {
       lastName: 'Doe',
       age: {'greaterThanOrEqual': 25, '<': 50}
     };
-    var cql = "title IN (?) AND lastname = ? AND age >= ? AND age < ?";
+    var cql = '"title" IN (?) AND "lastname" = ? AND "age" >= ? AND "age" < ?';
     var params = [ [ 'Mr', 'Mrs' ], 'Doe', 25, 50 ];
     it ("should return valid CQL", function() {
       var arr = collection._parseCriteria(query);
