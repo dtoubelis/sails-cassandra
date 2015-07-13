@@ -335,8 +335,56 @@ Model.find({
 will cause the adapter to throw an exception.
 
 #### 4.5.6. Limit, Sort, Skip
-Only `limit` is curently implemented and works as expected. `sort` and `skip` are
-not supported and silently ignored if provided.
+Only `limit` is curently implemented and works as expected.
+
+`sort` is supported but if the column requested to sort is not a clustering column then cassandra will throw an error.
+
+`skip` is not supported and silently ignored if provided.
+
+### 4.6 Raw cql query
+
+Raw cql query exposes cassadra-driver interfaces and is a way to implement functionality specific to cassandra only, such as using map and set data types and other cassandra specific queries.
+
+```javascript
+Model.query("Select * from table where col1=? and col2=?",['value1','value2'],function(err,results){
+    if(err) console.log(err);
+    else console.log(results);
+});
+```
+
+It also supports batch queries, you just need to supply array of queries and array of value arrays.
+
+### 4.7 Compound Primary Key Support
+
+Cassandra is different in terms of how it defines primary keys compared to other common databases. Compound primary key is a unique feature why people would actually use cassandra. Because in cql compound primary key with one partition key and one or more clustering columns enables big table wide rows functionality. 
+
+But in waterline, there is no such concept as of now to define compound primary key support. So I've chosen an existing waterline model attribute named "on" that can be used along with primaryKey=true for the same column, we can define a compound primary key. The traditional functionality of the "on" attribute will work as expected with columns other than the primary key, which is fine as the traditional "on" attribute used with primaryKey attribute would be meaningless before this.
+
+```javascript
+module.exports = {
+
+  autoPK: false,
+  
+  attributes: {
+    ...
+    my_partition_key: {
+      type: 'string',
+      required: true,
+      primaryKey: true,
+      on: ['my_clustering_key1','my_clustering_key2']
+    },
+    my_clustering_key1: {
+      type: 'text',
+      required: true
+    },
+    my_clustering_key1: {
+      type: 'text',
+      required: true
+    }
+  }
+
+};
+```
 
 
 ## 5. License
