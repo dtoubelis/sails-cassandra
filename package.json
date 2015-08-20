@@ -1,12 +1,14 @@
 {
   "name": "sails-cassandra",
   "description": "Apache Cassandra 2.x adapter for Sails/Waterline",
-  "version": "0.10.9",
-  "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
+  "version": "0.10.10",
+  "author": {
+    "name": "Alkeron Multimedia Inc.",
+    "email": "info@alkeron.com"
+  },
   "contributors": [
     {
-      "name": "dtoubelis",
-      "github": "https://github.com/dtoubelis"
+      "name": "dtoubelis"
     }
   ],
   "scripts": {
@@ -50,5 +52,28 @@
       "semantic"
     ]
   },
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "13c948d9264094905b0b5b1695e3278c922c15cc",
+  "homepage": "https://github.com/dtoubelis/sails-cassandra",
+  "_id": "sails-cassandra@0.10.10",
+  "_shasum": "318afa274e6102f80ad9556fdb417a69d69bf96e",
+  "_from": "sails-cassandra@0.10.10",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "dtoubelis",
+    "email": "dmitri@toubelis.org"
+  },
+  "maintainers": [
+    {
+      "name": "dtoubelis",
+      "email": "dmitri@toubelis.org"
+    }
+  ],
+  "dist": {
+    "shasum": "318afa274e6102f80ad9556fdb417a69d69bf96e",
+    "tarball": "http://registry.npmjs.org/sails-cassandra/-/sails-cassandra-0.10.10.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/sails-cassandra/-/sails-cassandra-0.10.10.tgz",
+  "readme": "ERROR: No README data found!"
 }

@@ -27,8 +27,7 @@ Apache Cassanda 2.+ database adapter for Sails/Waterline
 >   - .drop()
 > - [Iterable](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#iterable-interface)
 >   - .stream()
-> - Non-standard
->   - .query()
+
 
 ## 1. Installation
 Install from NPM.
