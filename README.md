@@ -9,6 +9,8 @@
 [npmImg]: https://badge.fury.io/js/sails-cassandra.svg
 [npmURL]: http://badge.fury.io/js/sails-cassandra
 
+[ ![Codeship Status for dtoubelis/sails-cassandra](https://codeship.com/projects/e0b5fc00-8139-0133-4148-7e50579f0890/status?branch=master)](https://codeship.com/projects/121165)
+
 
 # sails-cassandra
 Apache Cassanda 2.+ database adapter for Sails/Waterline
