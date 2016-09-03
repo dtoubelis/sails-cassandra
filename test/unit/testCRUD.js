@@ -29,7 +29,7 @@ describe('Collection', function() {
           contactPoints: [ process.env.WATERLINE_ADAPTER_TESTS_HOST || '127.0.0.1' ],
           user: process.env.WATERLINE_ADAPTER_TESTS_USER || 'root',
           password: process.env.WATERLINE_ADAPTER_TESTS_PASSWORD || '',
-          keyspace: process.env.WATERLINE_ADAPTER_TESTS_DATABASE || 'test',
+          keyspace: process.env.WATERLINE_ADAPTER_TESTS_DATABASE || 'test'
         }
       },
 

@@ -12,6 +12,10 @@
 
 # sails-cassandra
 Apache Cassanda 2.+ database adapter for Sails/Waterline
+> **Note:** This adapter is not compatible with Cassandra 3.x (see [issue #33] on github). There work has started on
+> a new version of the adapter, so stay tuned.
+
+[issue #33]: https://github.com/dtoubelis/sails-cassandra/issues/33
 
 > Implements:
 > - [Semantic](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#semantic-interface)
