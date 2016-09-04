@@ -1,7 +1,7 @@
 {
-  "name": "sails-cassandra",
-  "description": "Apache Cassandra 2.x adapter for Sails/Waterline",
-  "version": "0.10.11",
+  "name": "sails-cassandra3",
+  "description": "Apache Cassandra 3.x adapter for Sails/Waterline",
+  "version": "0.12.0",
   "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
   "contributors": [
     {
@@ -9,19 +9,16 @@
       "github": "https://github.com/dtoubelis"
     }
   ],
-  "scripts": {
-    "test": "make test"
-  },
   "main": "./lib/adapter.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/dtoubelis/sails-cassandra.git"
+    "url": "git://github.com/dtoubelis/sails-cassandra3.git"
   },
   "bugs": {
-    "url": "https://github.com/dtoubelis/sails-cassandra/issues"
+    "url": "https://github.com/dtoubelis/sails-cassandra3/issues"
   },
   "keywords": [
     "sails",
@@ -30,25 +27,35 @@
     "orm"
   ],
   "dependencies": {
-    "async": "~0.9.0",
-    "cassandra-driver": "~2.0.0",
-    "lodash": "~2.4.0",
-    "long": "~2.2.0",
-    "through2": "~0.6.3",
+    "async": "^2.0.1",
+    "cassandra-driver": "^3.0.0",
+    "lodash": "^4.15.0",
+    "long": "^3.2.0",
+    "mocha": "^3.0.2",
+    "semver": "^5.3.0",
+    "through2": "^2.0.1",
     "waterline-errors": "~0.10.0"
   },
   "devDependencies": {
     "captains-log": "~0.11.5",
-    "jshint": "~2.6.3",
-    "mocha": "~2.2.0",
-    "waterline": "~0.10.0",
-    "waterline-adapter-tests": "~0.10.7"
+    "eslint": "^3.1.1",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-promise": "^2.0.0",
+    "eslint-plugin-standard": "^2.0.0",
+    "waterline": "^0.12.2",
+    "waterline-adapter-tests": "^0.12.1"
   },
   "waterlineAdapter": {
     "waterlineVersion": "~0.10.0",
     "interfaces": [
       "semantic"
     ]
+  },
+  "scripts": {
+    "lint": "node_modules/.bin/eslint lib test",
+    "test-unit": "NODE_ENV=test node_modules/.bin/mocha --reporter spec --check-leaks test/unit/*.js",
+    "test-integration": "NODE_ENV=test node test/integration/runner.js",
+    "test": "npm run test-unit"
   },
   "license": "MIT"
 }

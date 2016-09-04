@@ -1,21 +1,17 @@
 [![Build Status][buildImg]][buildURL] [![Dependency Status][depImg]][depURL] [![npmImg][npmImg]][npmURL]
 
-[buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra.svg?branch=master
-[buildURL]: https://travis-ci.org/dtoubelis/sails-cassandra
+[buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra3.svg?branch=master
+[buildURL]: https://travis-ci.org/dtoubelis/sails-cassandra3
 
-[depImg]: https://gemnasium.com/dtoubelis/sails-cassandra.svg
-[depURL]: https://gemnasium.com/dtoubelis/sails-cassandra
+[depImg]: https://gemnasium.com/dtoubelis/sails-cassandra3.svg
+[depURL]: https://gemnasium.com/dtoubelis/sails-cassandra3
 
-[npmImg]: https://badge.fury.io/js/sails-cassandra.svg
-[npmURL]: http://badge.fury.io/js/sails-cassandra
+[npmImg]: https://badge.fury.io/js/sails-cassandra3.svg
+[npmURL]: http://badge.fury.io/js/sails-cassandra3
 
 
-# sails-cassandra
-Apache Cassanda 2.+ database adapter for Sails/Waterline
-> **Note:** This adapter is not compatible with Cassandra 3.x (see [issue #33] on github). There work has started on
-> a new version of the adapter, so stay tuned.
-
-[issue #33]: https://github.com/dtoubelis/sails-cassandra/issues/33
+# sails-cassandra3
+Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x versions of Cassandra.
 
 > Implements:
 > - [Semantic](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#semantic-interface)
@@ -194,34 +190,47 @@ models for existing tables:
 | blob           | 3       | [Buffer]       | [Buffer]          | binary               |
 | boolean        | 4       | Boolean        | Boolean           | boolean              |
 | counter        | 5       | [Long]         | Number or NaN     | integer              |
+| date           |         | [LocalDate]    | Date              | date                 |
 | decimal        | 6       | [BigDecimal]   | Number or NaN     | float                |
-| double         | 7       | Number         | Number            | float                |
-| float          | 8       | Number         | Number            | float                |
+| double         | 7       | [Number]       | Number            | float                |
+| float          | 8       | [Number]       | Number            | float                |
 | inet           | 16      | [InetAddress]  | String            | string               |
-| int            | 9       | Number         | Number            | integer              |
+| int            | 9       | [Number]       | Number            | integer              |
 | list           | 32      | Array          | Array             | array                |
-| map            | 33      | Object         | Null              | not supported (null) |
-| set            | 34      | Array          | Null              | not supported (null) |
+| map            | 33      | Object/ES6 Map | Null              | not supported (null) |
+| set            | 34      | Array/ES6 Set  | Null              | not supported (null) |
+| smallint       |         | [Number]       | Number            | integer              |
 | text           | 10      | String         | String            | text                 |
+| time           |         | [LocalTime]    | Number            | integer              |
 | timestamp      | 11      | Date           | Date              | datetime or date     |
 | timeuuid       | 15      | [TimeUuid]     | String            | string               |
+| tynyint        |         | [Number]       | Number            | integer              |
+| tuple          |         | [Tuple]        | Array             | array                |
 | uuid           | 12      | [Uuid]         | String            | string               |
 | varchar        | 13      | String         | String            | text                 |
 | varint         | 14      | [Integer]      | Number or NaN     | integer              |
 
 [Buffer]: https://nodejs.org/api/buffer.html
 
-[Long]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Long.html
+[Long]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Long.html
 
-[BigDecimal]: http://www.datastax.com/drivers/nodejs/2.0/module-types-BigDecimal.html
+[Number]: http://datastax.github.io/nodejs-driver/features/datatypes/numerical/
 
-[InetAddress]: http://www.datastax.com/drivers/nodejs/2.0/module-types-InetAddress.html
+[LocalDate]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-LocalDate.html
 
-[TimeUuid]: http://www.datastax.com/drivers/nodejs/2.0/module-types-TimeUuid.html
+[LocalTime]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-LocalTime.html
 
-[Uuid]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Uuid.html
+[BigDecimal]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-BigDecimal.html
 
-[Integer]: http://www.datastax.com/drivers/nodejs/2.0/module-types-Integer.html
+[InetAddress]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-InetAddress.html
+
+[TimeUuid]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-TimeUuid.html
+
+[Tuple]: http://datastax.github.io/nodejs-driver/features/datatypes/tuples/
+
+[Uuid]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Uuid.html
+
+[Integer]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Integer.html
 
 
 ### 4.4. Use of indexes

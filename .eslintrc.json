@@ -1,0 +1,22 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "comma-dangle": "error",
+    "curly": "error",
+    "eqeqeq": "error",
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "linebreak-style": ["error", "unix"],
+    "no-cond-assign": "error",
+    "no-console": "error",
+    "no-unused-vars": ["error", { "vars": "all", "args": "after-used" }],
+    "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "semi": "error"
+  }
+}

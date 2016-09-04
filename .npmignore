@@ -1,9 +1,11 @@
 *#
 node_modules
+npm-debug.log
 ssl
 .DS_STORE
 *~
 .idea
+*.iml
 nbproject
 test
 CONTRIBUTING.md
@@ -15,4 +17,8 @@ CONTRIBUTING.md
 *.swn
 *.swm
 .jshintrc
+.eslintrc.json
 .editorconfig
+.travis.yml
+.circle.yml
+
