@@ -1,13 +1,13 @@
 [![Build Status][buildImg]][buildURL] [![Dependency Status][depImg]][depURL] [![npmImg][npmImg]][npmURL]
 
-[buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra3.svg?branch=master
-[buildURL]: https://travis-ci.org/dtoubelis/sails-cassandra3
+[buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra.svg?branch=master
+[buildURL]: https://travis-ci.org/dtoubelis/sails-cassandra
 
-[depImg]: https://gemnasium.com/dtoubelis/sails-cassandra3.svg
-[depURL]: https://gemnasium.com/dtoubelis/sails-cassandra3
+[depImg]: https://gemnasium.com/dtoubelis/sails-cassandra.svg
+[depURL]: https://gemnasium.com/dtoubelis/sails-cassandra
 
-[npmImg]: https://badge.fury.io/js/sails-cassandra3.svg
-[npmURL]: http://badge.fury.io/js/sails-cassandra3
+[npmImg]: https://badge.fury.io/js/sails-cassandra.svg
+[npmURL]: http://badge.fury.io/js/sails-cassandra
 
 
 # sails-cassandra3
