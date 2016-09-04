@@ -1,7 +1,7 @@
 {
-  "name": "sails-cassandra3",
+  "name": "sails-cassandra",
   "description": "Apache Cassandra 3.x adapter for Sails/Waterline",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
   "contributors": [
     {
@@ -15,10 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/dtoubelis/sails-cassandra3.git"
+    "url": "git://github.com/dtoubelis/sails-cassandra.git"
   },
   "bugs": {
-    "url": "https://github.com/dtoubelis/sails-cassandra3/issues"
+    "url": "https://github.com/dtoubelis/sails-cassandra/issues"
   },
   "keywords": [
     "sails",
