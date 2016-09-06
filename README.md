@@ -10,7 +10,7 @@
 [npmURL]: http://badge.fury.io/js/sails-cassandra
 
 
-# sails-cassandra3
+# sails-cassandra
 Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x versions of Cassandra.
 
 > Implements:
