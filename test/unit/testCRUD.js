@@ -15,6 +15,8 @@ describe('Collection', function() {
 
   before(function(done) {
 
+    this.timeout(10000);
+
     var waterline = new Waterline();
 
     var config = {
