@@ -32,11 +32,10 @@ Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x 
 
 
 ## 1. Installation
-Install from NPM.
+Install from NPM:
 
 ```bash
-# In your app:
-$ npm install sails-cassandra
+$ npm install sails-cassandra --save
 ```
 
 ## 2. Configuring Sails
@@ -353,7 +352,12 @@ will cause the adapter to throw an exception.
 Only `limit` is curently implemented and works as expected. `sort` and `skip` are
 not supported and silently ignored if provided.
 
+## 5. Version History
+- 0.12.x - Supports Apache Cassandra v2.x and v3.x, uses [cassandra-driver] v3.x, requires Node.js v4+
+- 0.10.x - Supports Apache Cassandra v2.x, uses [cassandra-driver] v2.x, requires Node.js v0.10+
 
-## 5. License
+[cassandra-driver]: https://www.npmjs.com/package/cassandra-driver
+
+## 6. License
 See [LICENSE.md](./LICENSE.md) file for details.
 
