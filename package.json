@@ -1,7 +1,7 @@
 {
   "name": "sails-cassandra",
   "description": "Apache Cassandra adapter for Sails/Waterline",
-  "version": "0.12.6",
+  "version": "0.12.7",
   "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
   "contributors": [
     {
