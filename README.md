@@ -189,7 +189,7 @@ models for existing tables:
 | blob           | 3       | [Buffer]       | [Buffer]          | binary               |
 | boolean        | 4       | Boolean        | Boolean           | boolean              |
 | counter        | 5       | [Long]         | Number or NaN     | integer              |
-| date           |         | [LocalDate]    | Date              | date                 |
+| date           | 17      | [LocalDate]    | Date              | date                 |
 | decimal        | 6       | [BigDecimal]   | Number or NaN     | float                |
 | double         | 7       | [Number]       | Number            | float                |
 | float          | 8       | [Number]       | Number            | float                |
@@ -198,13 +198,13 @@ models for existing tables:
 | list           | 32      | Array          | Array             | array                |
 | map            | 33      | Object/ES6 Map | Null              | not supported (null) |
 | set            | 34      | Array/ES6 Set  | Null              | not supported (null) |
-| smallint       |         | [Number]       | Number            | integer              |
+| smallint       | 19      | [Number]       | Number            | integer              |
 | text           | 10      | String         | String            | text                 |
-| time           |         | [LocalTime]    | Number            | integer              |
+| time           | 18      | [LocalTime]    | Number            | integer              |
 | timestamp      | 11      | Date           | Date              | datetime or date     |
 | timeuuid       | 15      | [TimeUuid]     | String            | string               |
-| tynyint        |         | [Number]       | Number            | integer              |
-| tuple          |         | [Tuple]        | Array             | array                |
+| tynyint        | 20      | [Number]       | Number            | integer              |
+| tuple          | 49      | [Tuple]        | Array             | array                |
 | uuid           | 12      | [Uuid]         | String            | string               |
 | varchar        | 13      | String         | String            | text                 |
 | varint         | 14      | [Integer]      | Number or NaN     | integer              |
