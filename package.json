@@ -45,7 +45,7 @@
     "waterline-adapter-tests": "^0.12.1"
   },
   "waterlineAdapter": {
-    "waterlineVersion": "~0.12.0",
+    "waterlineVersion": "~0.10.0",
     "interfaces": [
       "semantic",
       "queryable",
@@ -56,7 +56,7 @@
   },
   "sails": {
     "adapter": {
-      "sailsVersion": "~0.12.0",
+      "sailsVersion": "~0.10.0",
       "implements": [
         "semantic",
         "queryable",
