@@ -210,25 +210,15 @@ models for existing tables:
 | varint         | 14      | [Integer]      | Number or NaN     | integer              |
 
 [Buffer]: https://nodejs.org/api/buffer.html
-
 [Long]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Long.html
-
 [Number]: http://datastax.github.io/nodejs-driver/features/datatypes/numerical/
-
 [LocalDate]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-LocalDate.html
-
 [LocalTime]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-LocalTime.html
-
 [BigDecimal]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-BigDecimal.html
-
 [InetAddress]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-InetAddress.html
-
 [TimeUuid]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-TimeUuid.html
-
 [Tuple]: http://datastax.github.io/nodejs-driver/features/datatypes/tuples/
-
 [Uuid]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Uuid.html
-
 [Integer]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Integer.html
 
 ### 4.4. Use of indexes
