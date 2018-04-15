@@ -33,13 +33,15 @@ Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x 
 
 
 ## 1. Installation
+
 Install from NPM:
 
 ```bash
-$ npm install sails-cassandra --save
+npm install sails-cassandra --save
 ```
 
 ## 2. Configuring Sails
+
 Add the `cassandra` configuration to the `config/connections.js` file. The basic
 options are as follows:
 
@@ -82,15 +84,14 @@ Authentication information for `cassandra-driver` is typically supplied in
 an existing value. This also means that if you wish to use your own `authProvider`
 you will need to remove `user` and `password` from the configuration.  
 
-
 ## 3. Running Tests
+
 You can set environment variables to override the default database configuration
 for running tests as follows:
 
 ```sh
-$ WATERLINE_ADAPTER_TESTS_PASSWORD=yourpass npm test
+WATERLINE_ADAPTER_TESTS_PASSWORD=yourpass npm test
 ```
-
 
 Default settings are:
 
@@ -106,13 +107,13 @@ Default settings are:
 > **Note:** Default name of the keyspace for running tests is `test`. Make
 > sure you created it in your database before executing `npm test`.
 
-
 ## 4. Implementation Notes
+
 This section describes behaviour of Apache Cassandra adapter that is distinct
 from other database types.
 
-
 ### 4.1. Naming of tables and columns
+
 Column and table names in Cassandra are case insensitive and this ambiguity
 makes it difficult to map between attribute names that are case sensitive and
 column names that are not. There are two possible workarounds for this:
@@ -127,8 +128,8 @@ column names that are not. There are two possible workarounds for this:
    to/from attribute names. This is not very elegant but it works and this is
    the current preferred approach.
 
-
 ### 4.2. Autoincrement
+
 The autoincrement feature was plaguing ORM frameworks right from their inseption
 as it requires 1-2 extra queries in order to retrieve new record identifier from
 underlying database into the framework. It also does not work very well with
@@ -159,8 +160,8 @@ achieve the same functionality using the following rules:
 
 [this issue]: https://github.com/balderdashy/waterline/issues/909
 
-
 ### 4.3. Type conversion between Cassandra and Sails/Waterline
+
 The following table represents mappings between Sails/Waterline model data types
 and Apache Cassandra data types:
 
@@ -178,7 +179,6 @@ and Apache Cassandra data types:
 | json                 | ???      | text (UTF-8 text)                 |
 | email                | String   | ascii (US-ASCII character string) |
 | autoIncrement=true   | String   | timeuuid                          |
-
 
 The following table may be used as a guideline when creating Sails/Waterline
 models for existing tables:
@@ -232,8 +232,8 @@ models for existing tables:
 
 [Integer]: http://docs.datastax.com/en/latest-nodejs-driver-api/module-types-Integer.html
 
-
 ### 4.4. Use of indexes
+
 Apache Cassandra require index on a column that is used in `where` clause of
 `select` statement and unlike other database it will produce and exception if
 the index is missing.
@@ -249,12 +249,14 @@ will create indexes for attributes with `index` or `unique` attributes set to
 > and both are treated in the exactly same way.
 
 ### 4.5. Search criteria
+
 Apache Cassandra only supports subset of operation in selection criteria in
 comparison to relational databases and this section describes what is currently
 supported.
 
 
 #### 4.5.1. Key Pairs
+
 This is an exact match criteria and it is declared as follows:
 
 ```javascript
@@ -263,14 +265,14 @@ Model.find({firstName: 'Joe', lastName: 'Doe'});
 
 It is supported and it will be executed as follows:
 
-```
+```sql
 SELECT id, first_name, last_name
   FROM users
   WHERE first_name = 'Joe' AND last_name = 'Doe'
   ALLOW FILTERING;
 ```
-Please also refer to [Use of Indexes](#44-use-of-indexes) above.
 
+Please also refer to [Use of Indexes](#44-use-of-indexes) above.
 
 #### 4.5.2. Modified Pair
 This criteria:
@@ -281,7 +283,7 @@ Model.find({age: {'>': 18, 'lessThanOrEqual': 65});
 
 will be converted to CQL query that may look like this:
 
-```
+```sql
 SELECT id,first_name,last_name
   FROM users
   WHERE age > 18 AND age <= 65
@@ -302,8 +304,8 @@ and supported operations are as follows:
 | `'startsWith'`         |  `none`   |  **No**   |
 | `'endsWith'`           |  `none`   |  **No**   |
 
-    
 #### 4.5.3. In Pairs
+
 This criteria:
 
 ```javascript
@@ -312,19 +314,20 @@ Model.find({title: ['Mr', 'Mrs']});
 
 will be rendered into the following CQL statement:
 
-```
+```sql
 SELECT id, first_name, last_name
   FROM users
   WHERE title IN ( 'Mr', 'Mrs' )
   ALLOW FILTERING;
 ```
+
 > **Note:** that `IN` criterion works differently in Apache Cassandra. It is
 > subject of [certain limitations] and is considered a pattern to be avoided.
 
 [certain limitations]: http://www.datastax.com/documentation/cql/3.1/cql/cql_reference/select_r.html?scroll=reference_ds_d35_v2q_xj__selectIN
 
-
 #### 4.5.4. Not-In Pair
+
 **Not supported** since Apache Cassandra does not support `NOT IN` criterion,
 so this construct:
 
@@ -334,8 +337,8 @@ Model.find({name: {'!': ['Walter', 'Skyler']}});
 
 will cause adapter to throw an exception.
 
-
 #### 4.5.5. Or Pairs
+
 **Not supported** since Apache Cassandra has no `OR` criterion, so this construct:
 
 ```javascript
@@ -350,15 +353,17 @@ Model.find({
 will cause the adapter to throw an exception.
 
 #### 4.5.6. Limit, Sort, Skip
+
 Only `limit` is curently implemented and works as expected. `sort` and `skip` are
 not supported and silently ignored if provided.
 
 ## 5. Version History
+
 - 0.12.x - Supports Apache Cassandra v2.x and v3.x, uses [cassandra-driver] v3.x, requires Node.js v4+
 - 0.10.x - Supports Apache Cassandra v2.x, uses [cassandra-driver] v2.x, requires Node.js v0.10+
 
 [cassandra-driver]: https://www.npmjs.com/package/cassandra-driver
 
 ## 6. License
-See [LICENSE.md](./LICENSE.md) file for details.
 
+See [LICENSE.md](./LICENSE.md) file for details.
