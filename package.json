@@ -1,7 +1,7 @@
 {
   "name": "sails-cassandra",
   "description": "Apache Cassandra adapter for Sails/Waterline",
-  "version": "0.12.14",
+  "version": "0.12.15",
   "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
   "contributors": [
     {
@@ -30,7 +30,7 @@
     "async": "^2.0.1",
     "cassandra-driver": "^3.0.0",
     "lodash": "^4.15.0",
-    "semver": "^5.3.0",
+    "semver": "^5.5.0",
     "through2": "^2.0.1",
     "waterline-errors": "~0.10.0"
   },
@@ -45,7 +45,7 @@
     "waterline-adapter-tests": "^0.12.1"
   },
   "waterlineAdapter": {
-    "waterlineVersion": "~0.12.0",
+    "waterlineVersion": "~0.10.0",
     "interfaces": [
       "semantic",
       "queryable",
@@ -56,7 +56,7 @@
   },
   "sails": {
     "adapter": {
-      "sailsVersion": "~0.12.0",
+      "sailsVersion": "~0.10.0",
       "implements": [
         "semantic",
         "queryable",
