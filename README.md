@@ -21,13 +21,14 @@ Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x 
 >   - .count()
 >   - .update()
 >   - .destroy()
+> - [Queryable](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#queryable-interface)
 > - [Migratable](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#migratable-interface)
 >   - .define()
 >   - .describe()
 >   - .drop()
 > - [Iterable](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#iterable-interface)
 >   - .stream()
-> - Non-standard
+> - [SQL](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#sql-interface)
 >   - .query()
 
 

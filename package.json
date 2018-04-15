@@ -1,7 +1,7 @@
 {
   "name": "sails-cassandra",
   "description": "Apache Cassandra adapter for Sails/Waterline",
-  "version": "0.12.12",
+  "version": "0.12.13",
   "author": "Alkeron Multimedia Inc. <info@alkeron.com>",
   "contributors": [
     {
@@ -45,10 +45,26 @@
     "waterline-adapter-tests": "^0.12.1"
   },
   "waterlineAdapter": {
-    "waterlineVersion": "~0.10.0",
+    "waterlineVersion": "~0.12.0",
     "interfaces": [
-      "semantic"
+      "semantic",
+      "queryable",
+      "migratable",
+      "iterable",
+      "sql"
     ]
+  },
+  "sails": {
+    "adapter": {
+      "sailsVersion": "~0.12.0",
+      "implements": [
+        "semantic",
+        "queryable",
+        "migratable",
+        "iterable",
+        "sql"
+      ]
+    }
   },
   "scripts": {
     "lint": "node_modules/.bin/eslint lib test",
