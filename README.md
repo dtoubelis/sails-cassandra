@@ -31,7 +31,6 @@ Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x 
 > - [SQL](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md#sql-interface)
 >   - .query()
 
-
 ## 1. Installation
 
 Install from NPM:
@@ -82,7 +81,7 @@ Authentication information for `cassandra-driver` is typically supplied in
 `authProvider` option, however `sails-cassandra` adapter will also recognize
 `user` and `password` options and convert them into `authProvider` overriding
 an existing value. This also means that if you wish to use your own `authProvider`
-you will need to remove `user` and `password` from the configuration.  
+you will need to remove `user` and `password` from the configuration.
 
 ## 3. Running Tests
 
@@ -122,7 +121,7 @@ column names that are not. There are two possible workarounds for this:
    sensitive by including them in double quotes. This may seem as a good idea on
    the surface but it does not cover a use case when tables are not created by
    sails/waterline but by an external process.
- 
+
 2. Converting table/column names to lower case is an another approach. This way
    we always convert table/column names to lower case before mapping them
    to/from attribute names. This is not very elegant but it works and this is
@@ -165,20 +164,20 @@ achieve the same functionality using the following rules:
 The following table represents mappings between Sails/Waterline model data types
 and Apache Cassandra data types:
 
-| Sails/Waterline Type | JS Type  | Cassandra Type                    |
-|:---------------------|:---------|:----------------------------------|
-| string               | String   | text (UTF-8 text)                 |
-| text                 | String   | text (UTF-8 text)                 |
-| integer              | Number   | bigint (64-bit signed integer)    |
-| float                | Number   | double (64-bit float)             |
-| date                 | Date     | timestamp                         |
-| datetime             | Date     | timestamp                         |
-| boolean              | Boolean  | boolean                           |
-| binary               | [Buffer] | blob                              |
-| array                | Array    | list<text>                        |
-| json                 | ???      | text (UTF-8 text)                 |
-| email                | String   | ascii (US-ASCII character string) |
-| autoIncrement=true   | String   | timeuuid                          |
+| Sails/Waterline Type | JS Type  | Cassandra Type                      |
+|:---------------------|:---------|:------------------------------------|
+| string               | String   | `text` (UTF-8 text)                 |
+| text                 | String   | `text` (UTF-8 text)                 |
+| integer              | Number   | `bigint` (64-bit signed integer)    |
+| float                | Number   | `double` (64-bit float)             |
+| date                 | Date     | `timestamp`                         |
+| datetime             | Date     | `timestamp`                         |
+| boolean              | Boolean  | `boolean`                           |
+| binary               | [Buffer] | `blob`                              |
+| array                | Array    | `list<text>`                        |
+| json                 | ???      | `text` (UTF-8 text)                 |
+| email                | String   | `ascii` (US-ASCII character string) |
+| autoIncrement=true   | String   | `timeuuid`                          |
 
 The following table may be used as a guideline when creating Sails/Waterline
 models for existing tables:
@@ -254,7 +253,6 @@ Apache Cassandra only supports subset of operation in selection criteria in
 comparison to relational databases and this section describes what is currently
 supported.
 
-
 #### 4.5.1. Key Pairs
 
 This is an exact match criteria and it is declared as follows:
@@ -275,6 +273,7 @@ SELECT id, first_name, last_name
 Please also refer to [Use of Indexes](#44-use-of-indexes) above.
 
 #### 4.5.2. Modified Pair
+
 This criteria:
 
 ```javascript
