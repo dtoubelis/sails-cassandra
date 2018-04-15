@@ -1,3 +1,5 @@
+# sails-cassandra
+
 [![Build Status][buildImg]][buildURL] [![Dependency Status][depImg]][depURL] [![npmImg][npmImg]][npmURL]
 
 [buildImg]: https://travis-ci.org/dtoubelis/sails-cassandra.svg?branch=master
@@ -9,8 +11,6 @@
 [npmImg]: https://badge.fury.io/js/sails-cassandra.svg
 [npmURL]: http://badge.fury.io/js/sails-cassandra
 
-
-# sails-cassandra
 Apache Cassanda database adapter for Sails/Waterline. It works with 2.x and 3.x versions of Cassandra.
 
 > Implements:
